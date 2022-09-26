@@ -1,5 +1,5 @@
 const errorMap = {
-  INVALID_FIELDS: 400,
+  INVALID_VALUE: 400,
 };
 
 const mapError = (type) => errorMap[type] || 500;
