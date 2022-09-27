@@ -1,9 +1,13 @@
 const express = require('express');
 const { userController } = require('../controllers');
-const { emailAlreadyExists } = require('../middlewares/userVerify');
+const { emailVerify, validateJWT } = require('../middlewares');
 
 const router = express.Router();
 
-router.post('/', emailAlreadyExists, userController.register);
+router.post('/', emailVerify, userController.register);
+
+router.get('/', validateJWT, userController.findAll);
+
+router.get('/:id', validateJWT, userController.getByUserId);
 
 module.exports = router;
