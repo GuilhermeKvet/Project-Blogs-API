@@ -1,5 +1,7 @@
 const Joi = require('joi');
 
+const idCategory = Joi.number().integer().min(1).required();
+
 const newUserSchema = Joi.object({
   displayName: Joi.string()
     .min(8)
@@ -16,6 +18,13 @@ const newUserSchema = Joi.object({
   image: Joi.string(),
 });
 
+const newPostSchema = Joi.object({
+  title: Joi.string().min(1).required(),
+  content: Joi.string().min(1).required(),
+  categoryIds: Joi.array().items(idCategory).required(),
+});
+
 module.exports = {
   newUserSchema,
+  newPostSchema,
 };
