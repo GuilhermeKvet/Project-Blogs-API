@@ -1,4 +1,4 @@
-const { BlogPost, PostCategory } = require('../models');
+const { User, BlogPost, PostCategory, Category } = require('../models');
 const { validatePost } = require('./validations/validationInputValues');
 
 const register = async (userId, { title, content, categoryIds }) => {
@@ -14,6 +14,15 @@ const register = async (userId, { title, content, categoryIds }) => {
   return { type: null, message: newPost };
 };
 
+const findAll = async (userId) => BlogPost.findAll({
+  where: { userId },
+  include: [
+    { model: User, as: 'user', on: { id: userId }, attributes: { exclude: ['password'] } },
+    { model: Category, as: 'categories', through: { attributes: [] } },
+  ],
+});
+
 module.exports = {
   register,
+  findAll,
 };
