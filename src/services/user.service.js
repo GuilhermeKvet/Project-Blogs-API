@@ -13,8 +13,11 @@ const getByUserId = async (id) => User.findByPk(id, { attributes: { exclude: ['p
 
 const findAll = async () => User.findAll({ attributes: { exclude: ['password'] } });
 
+const deleteUser = async (userId) => User.destroy({ where: { id: userId } });
+
 module.exports = {
   register,
   getByUserId,
   findAll,
+  deleteUser,
 };
