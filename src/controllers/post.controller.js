@@ -27,10 +27,16 @@ const findById = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
-  const { data: { userId } } = req.user;
-  const { type, message } = await postService.update(id, title, content, userId);
+  const { type, message } = await postService.update(id, title, content);
   if (type) return res.status(errorMap.mapError(type)).json({ message });
   return res.status(200).json(message);
+};
+
+const deletePost = async (req, res) => {
+  const { id } = req.params;
+  const { type, message } = await postService.deletePost(id);
+  if (type) return res.status(errorMap.mapError(type)).json({ message });
+  return res.status(204).json();
 };
 
 module.exports = {
@@ -38,4 +44,5 @@ module.exports = {
   findAll,
   findById,
   update,
+  deletePost,
 };
