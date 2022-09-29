@@ -8,6 +8,8 @@ router.post('/', validateJWT, postController.register);
 
 router.get('/', validateJWT, postController.findAll);
 
+router.get('/search', validateJWT, postController.findSearch);
+
 router.get('/:id', validateJWT, postController.findById);
 
 router.put('/:id', validateJWT, validateAuthorizationPost, postController.update);
